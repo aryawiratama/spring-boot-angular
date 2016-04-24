@@ -1,0 +1,107 @@
+<div>
+    <button type="button" class="btn btn-primary" style="margin-bottom: 10px" ng-click="openAddModal()">Add Item</button>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Cost</th>
+                <th>Stock</th>
+                <th>Expired Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items">
+                <td>{{item.code}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.price| currency:'Rp ' : 2}}</td>
+                <td>{{item.cost| currency: 'Rp ' : 2}}</td>
+                <td>{{item.stock}}</td>
+                <td>{{item.expiredDate|date}}</td>
+                <td align="center">
+                    <button class="btn btn-success" ng-click="openEditModal(item)">Edit</button>
+                    <button class="btn btn-danger" ng-click="deleteConfirm(item)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <script type="text/ng-template" id="modalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Add Item</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Code</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="code">
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Name</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="name">
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Price</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="price" ng-currency currency-symbol="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Cost</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="cost" ng-currency currency-symbol="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Stock</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="stock" ng-currency currency-symbol="">
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Expired Date</label>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" ng-model="expiredDate">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
+            <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+    
+    <script type="text/ng-template" id="deleteConfirm.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Delete Confirm</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label class="control-label"> Are you sure want to delete {{itemCode}} ?</label>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" ng-click="yes()">Yes</button>
+            <button type="button" class="btn btn-danger" ng-click="no()">No</button>
+        </div>
+    </script>
+</div>

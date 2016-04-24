@@ -3,3 +3,4 @@ mvnw
 mvnw.cmd
 /target
 bower_components
+nbactions.xml

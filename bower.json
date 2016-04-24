@@ -1,5 +1,5 @@
 {
-  "name": "spring-boot=angular",
+  "name": "spring-boot-angular",
   "authors": [
     "aryawiratama <stop.drunk@gmail.com>"
   ],
@@ -18,7 +18,10 @@
   ],
   "dependencies": {
     "angular": "^1.5.0",
-    "angular-bootstrap": "^1.2.4",
-    "angular-ui-router": "^0.2.18"
+    "angular-bootstrap": "^1.2.5",
+    "angular-ui-router": "^0.2.18",
+    "angular-resource": "^1.5.3",
+    "angular-animate": "^1.5.3",
+    "ng-currency": "^0.9.6"
   }
 }
