@@ -1,6 +1,6 @@
 var mainApp = angular.module('mainApp.itemController',['ngAnimate', 'ng-currency', 'mainApp.itemService']);
 
-mainApp.controller('ItemCtrl', ['$scope', '$uibModal', '$log', '$state', 'ItemService', function($scope, $uibModal, $log, $state, ItemService){
+mainApp.controller('ItemCtrl', ['$scope', '$uibModal', '$state', 'ItemService', function($scope, $uibModal, $state, ItemService){
     $scope.items = ItemService.query();
     
     $scope.animationsEnabled = true;
@@ -18,7 +18,6 @@ mainApp.controller('ItemCtrl', ['$scope', '$uibModal', '$log', '$state', 'ItemSe
             $state.reload();
         }, function(){
             // cancel modal
-            $log.info('Modal dismissed at : ' + new Date());
         });
     };
     // open edit modal
@@ -70,6 +69,31 @@ mainApp.controller('ItemCtrl', ['$scope', '$uibModal', '$log', '$state', 'ItemSe
 
 // modal add item controller
 mainApp.controller('ModalAddCtrl', ['$scope', '$uibModalInstance', 'ItemService', function($scope, $uibModalInstance, ItemService){        
+    
+    $scope.clear = $scope.expiredDate = null;
+    
+    $scope.dateOptions = {
+        dateDisabled: disabled,
+        formatYear: 'yy',
+        maxDate: new Date(2020, 12, 31),
+        minDate: new Date(),
+        startingDay: 1
+    };
+    // disabled weekend selection
+    function disabled(data){
+        var date = data.date, mode = data.mode;
+        return mode === 'day' && (date.getDay()===0 || date.getDay()===6);
+    };
+    
+    $scope.open = function(){
+        $scope.popup.opened = true;
+    };
+    $scope.popup = {
+        opened: false
+    };
+    
+    $scope.altInputFormats = ['d!/M!/yyyy!'];
+    
     $scope.save = function(){
         var item = new ItemService();
         item.code = $scope.code;
@@ -78,8 +102,9 @@ mainApp.controller('ModalAddCtrl', ['$scope', '$uibModalInstance', 'ItemService'
         item.cost = $scope.cost;
         item.stock = $scope.stock;
         item.expiredDate = $scope.expiredDate;
-        item.$save();
-        $uibModalInstance.close();
+        item.$save(function(){
+            $uibModalInstance.close();
+        });
     };
     
     $scope.cancel = function (){
@@ -89,6 +114,30 @@ mainApp.controller('ModalAddCtrl', ['$scope', '$uibModalInstance', 'ItemService'
 
 // modal edit controller
 mainApp.controller('ModalEditCtrl',['$scope', '$uibModalInstance', 'ItemService', 'item', function($scope, $uibModalInstance, ItemService, item){
+    $scope.clear = $scope.expiredDate = null;
+    
+    $scope.dateOptions = {
+        dateDisabled: disabled,
+        formatYear: 'yy',
+        maxDate: new Date(2020, 12, 31),
+        minDate: new Date(),
+        startingDay: 1
+    };
+    // disabled weekend selection
+    function disabled(data){
+        var date = data.date, mode = data.mode;
+        return mode === 'day' && (date.getDay()===0 || date.getDay()===6);
+    };
+    
+    $scope.open = function(){
+        $scope.popup.opened = true;
+    };
+    $scope.popup = {
+        opened: false
+    };
+    
+    $scope.altInputFormats = ['d!/M!/yyyy!'];
+    
     $scope.code = item.code;
     $scope.name = item.name;
     $scope.price = item.price;
