@@ -1,5 +1,5 @@
 # Belajar Spring Boot dan Angular JS
-Project untuk belajar pring boot, dengan Angular JS pada bagian depan (front end). Project ini masih sangat sederhana, hanya berisikan proses CRUD data. Spring Boot hanya menghasilkan data dengan format JSON yang mana nantinya akan diakses (consume) oleh Angular JS. Project ini saya gunakan sebagai tempat untuk belajar Spring Boot dan AngularJS. Bagi yang mau belajar bisa langsung download project ini. Terima Kasih.
+Project untuk belajar Spring boot, dengan Angular JS pada bagian depan (front end). Project ini masih sangat sederhana, hanya berisikan proses CRUD data. Spring Boot hanya menghasilkan data dengan format JSON yang mana nantinya akan diakses (consume) oleh Angular JS. Project ini saya gunakan sebagai tempat untuk belajar Spring Boot dan AngularJS. Bagi yang mau belajar bisa langsung download project ini. Terima Kasih.
 
 ## Getting Started
 ### Database
