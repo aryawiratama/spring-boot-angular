@@ -5,20 +5,20 @@
             <tr>
                 <th>Code</th>
                 <th>Name</th>
-                <th>Price</th>
-                <th>Cost</th>
-                <th>Stock</th>
+                <th align="right">Price</th>
+                <th align="right">Cost</th>
+                <th align="right">Stock</th>
                 <th>Expired Date</th>
-                <th>Action</th>
+                <th align="center">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="item in items">
                 <td>{{item.code}}</td>
                 <td>{{item.name}}</td>
-                <td>{{item.price| currency:'Rp ' : 2}}</td>
-                <td>{{item.cost| currency: 'Rp ' : 2}}</td>
-                <td>{{item.stock}}</td>
+                <td align="right">{{item.price| currency:'Rp ' : 2}}</td>
+                <td align="right">{{item.cost| currency: 'Rp ' : 2}}</td>
+                <td align="right">{{item.stock}}</td>
                 <td>{{item.expiredDate|date}}</td>
                 <td align="center">
                     <button class="btn btn-success" ng-click="openEditModal(item)">Edit</button>
@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label">Code</label>
                     <div class="col-md-8">
-                        <input type="text" class="form-control" ng-model="code">
+                        <input type="text" class="form-control" ng-model="code" ng-readonly="true">
                     </div>
                 </div>
             </div>

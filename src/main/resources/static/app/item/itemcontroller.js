@@ -96,7 +96,7 @@ mainApp.controller('ModalAddCtrl', ['$scope', '$uibModalInstance', 'ItemService'
     
     $scope.save = function(){
         var item = new ItemService();
-        item.code = $scope.code;
+        item.code = null;
         item.name = $scope.name;
         item.price = $scope.price;
         item.cost = $scope.cost;
@@ -146,17 +146,20 @@ mainApp.controller('ModalEditCtrl',['$scope', '$uibModalInstance', 'ItemService'
     $scope.expiredDate = item.expiredDate;
     
     $scope.save = function(){
-        var editItem = ItemService.get({id:item.id}, function(){
-            editItem.code = $scope.code;
-            editItem.name = $scope.name;
-            editItem.price = $scope.price;
-            editItem.cost = $scope.cost;
-            editItem.stock = $scope.stock;
-            editItem.expiredDate = $scope.expiredDate;
-            editItem.$save(function(){
-                $uibModalInstance.close();
-            });
-        });
+        var editItem = ItemService.get({id:item.id});
+        editItem.code = $scope.code;
+        editItem.name = $scope.name;
+        editItem.price = $scope.price;
+        editItem.cost = $scope.cost;
+        editItem.stock = $scope.stock;
+        editItem.expiredDate = $scope.expiredDate;
+        ItemService.update({id:item.id}, editItem)
+                .$promise.then(function(){
+                    $uibModalInstance.close();
+                }, function(){
+                    alert("error");
+                });
+        
     };
     
     $scope.cancel = function (){

@@ -39,6 +39,9 @@ public class ItemController {
     @RequestMapping(method = RequestMethod.POST)
     @Transactional(readOnly = false)
     public ResponseEntity<Void> saveItem(@RequestBody @Valid Item item){
+        Integer lastCode = itemRepository.findLastCode();
+        String code = "M-" + String.format("%08d", (lastCode + 1));
+        item.setCode(code);
         item = itemRepository.save(item);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(item.getId()).toUri();
         HttpHeaders headers = new HttpHeaders();

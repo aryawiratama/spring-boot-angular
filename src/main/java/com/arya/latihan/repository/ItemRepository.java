@@ -9,6 +9,7 @@ package com.arya.latihan.repository;
 import com.arya.latihan.entity.Item;
 import java.io.Serializable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  *
@@ -16,4 +17,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface ItemRepository extends JpaRepository<Item, String>{
     
+    @Query("SELECT COUNT(i) FROM Item i")
+    public Integer findLastCode();
 }

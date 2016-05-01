@@ -16,7 +16,6 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 /**
@@ -32,8 +31,6 @@ public class Item {
     private String id;
     
     @Column(name = "code", nullable = false, unique = true)
-    @Size(min = 3, max = 50)
-    @NotNull
     private String code;
     
     @Column(name = "name", nullable = false)
@@ -57,7 +54,7 @@ public class Item {
     
     @Column(name = "expired_date")
     private DateTime expiredDate;
-
+    
     public String getId() {
         return id;
     }
@@ -113,5 +110,5 @@ public class Item {
     public void setExpiredDate(DateTime expiredDate) {
         this.expiredDate = expiredDate;
     }
-    
+
 }
