@@ -29,70 +29,76 @@
     </table>
     
     <script type="text/ng-template" id="modalContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Add Item</h3>
-        </div>
-        <div class="modal-body">
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-md-3 control-label">Code</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" ng-model="code" ng-readonly="true">
+        <form name="form" ng-submit="save()" novalidate>
+            <div class="modal-header">
+                <h3 class="modal-title">Add Item</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Code</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" ng-model="code" ng-readonly="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Name</label>
+                        <div class="col-md-8" ng-class="{'has-error' : (form.name.$error.required || form.name.$error.minlength) && form.name.$dirty}">
+                            <input type="text" name="name" class="form-control" ng-model="name" ng-minlength="3" required>
+                            <p ng-show="form.name.$error.required && form.name.$dirty" class="help-block" > Name is required</p>
+                            <p ng-show="form.name.$error.minlength" class="help-block" > Name too short</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Price</label>
+                        <div class="col-md-8" ng-class="{'has-error' : form.price.$error.required && form.price.$dirty}">
+                            <input type="text" name="price" class="form-control" ng-model="price" ng-currency currency-symbol="" required>
+                            <p ng-show="form.price.$error.required && form.price.$dirty" class="help-block">Price is required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Cost</label>
+                        <div class="col-md-8" ng-class="{'has-error' : form.cost.$error.required && form.cost.$dirty}">
+                            <input type="text" name="cost" class="form-control" ng-model="cost" ng-currency currency-symbol="" required>
+                            <p ng-show="{form.cost.$error.required && form.cost.$dirty}" class="help-block">Cost is required</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Stock</label>
+                        <div class="col-md-8" ng-class="{'has-error' : form.stock.$error.required && form.stock.$dirty}">
+                            <input type="text" name="stock" class="form-control" ng-model="stock" ng-currency currency-symbol="" required>
+                            <p ng-show="{form.stock.$error.required && form.stock.$dirty}"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Expired Date</label>
+                        <div class="col-md-8">
+                            <p class="input-group">
+                                <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="expiredDate" is-open="popup.opened" datepicker-options="dateOptions"
+                                       close-text="Close" alt-input-formats="altInputFormats" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-md-3 control-label">Name</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" ng-model="name">
-                    </div>
-                </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">Save</button>
+                <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
             </div>
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-md-3 control-label">Price</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" ng-model="price" ng-currency currency-symbol="">
-                    </div>
-                </div>
-            </div>
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-md-3 control-label">Cost</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" ng-model="cost" ng-currency currency-symbol="">
-                    </div>
-                </div>
-            </div>
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-md-3 control-label">Stock</label>
-                    <div class="col-md-8">
-                        <input type="text" class="form-control" ng-model="stock" ng-currency currency-symbol="">
-                    </div>
-                </div>
-            </div>
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label class="col-md-3 control-label">Expired Date</label>
-                    <div class="col-md-8">
-                        <!--<input type="text" class="form-control" ng-model="expiredDate">-->
-                        <p class="input-group">
-                            <input type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="expiredDate" is-open="popup.opened" datepicker-options="dateOptions"
-                                   ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
-            <button type="button" class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
+        </form>
     </script>
     
     <script type="text/ng-template" id="deleteConfirm.html">
