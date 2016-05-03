@@ -66,7 +66,7 @@
                         <label class="col-md-3 control-label">Cost</label>
                         <div class="col-md-8" ng-class="{'has-error' : form.cost.$error.required && form.cost.$dirty}">
                             <input type="text" name="cost" class="form-control" ng-model="cost" ng-currency currency-symbol="" required>
-                            <p ng-show="{form.cost.$error.required && form.cost.$dirty}" class="help-block">Cost is required</p>
+                            <p ng-show="form.cost.$error.required && form.cost.$dirty" class="help-block">Cost is required</p>
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                         <label class="col-md-3 control-label">Stock</label>
                         <div class="col-md-8" ng-class="{'has-error' : form.stock.$error.required && form.stock.$dirty}">
                             <input type="text" name="stock" class="form-control" ng-model="stock" ng-currency currency-symbol="" required>
-                            <p ng-show="{form.stock.$error.required && form.stock.$dirty}"></p>
+                            <p ng-show="form.stock.$error.required && form.stock.$dirty">Stock is required</p>
                         </div>
                     </div>
                 </div>
