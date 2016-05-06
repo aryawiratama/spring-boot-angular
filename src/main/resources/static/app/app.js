@@ -1,5 +1,5 @@
 'use strict';
-var mainApp = angular.module('mainApp', ['ui.router', 'ui.bootstrap', 'mainApp.itemController']);
+var mainApp = angular.module('mainApp', ['ui.router', 'ui.bootstrap', 'mainApp.itemController', 'mainApp.loginController']);
 
 mainApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/"); // set default url
@@ -14,8 +14,15 @@ mainApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
             templateUrl: '/app/dashboard/dashboard.html'
         };
         
+        var login = {
+            url:'/login',
+            templateUrl: '/app/login/login.html',
+            controller: 'LoginCtrl'
+        };
+        
         $stateProvider.state('item', item)
-                .state('dashboard',dashboard);
+                .state('dashboard',dashboard)
+                .state('login', login);
 }]);
 
 mainApp.controller('MainCtrl',['$scope', '$state', function($scope, $state){
