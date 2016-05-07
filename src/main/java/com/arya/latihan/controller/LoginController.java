@@ -21,7 +21,6 @@ public class LoginController {
     
     @RequestMapping(value = "/api/user", method = RequestMethod.GET)
     public Principal getUser(Principal user){
-        System.out.println("Masuk sini");
         return user;
     }
 }
