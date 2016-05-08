@@ -41,4 +41,11 @@ mainApp.controller('MainCtrl',['$scope', '$state', 'LoginService', function($sco
             }
         });
     };
+    
+    $scope.logout = function(){
+        Login.user().logout().$promise.then(function(){
+            $state.go(login);
+            $scope.authenticated = false;
+        });
+    };
 }]);

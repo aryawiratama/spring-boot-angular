@@ -11,6 +11,14 @@ mainApp.factory("LoginService", ['$resource', function($resource){
                 } 
             });
             return user;
+        },
+        user : function(){
+            var logout = $resource('logout',{},{
+                logout:{
+                    method: 'POST'
+                }
+            });
+            return logout;
         }
     };
     return service;
