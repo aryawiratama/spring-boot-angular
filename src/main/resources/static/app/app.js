@@ -1,5 +1,5 @@
 'use strict';
-var mainApp = angular.module('mainApp', ['ui.router', 'ui.bootstrap', 'mainApp.itemController', 'mainApp.loginController']);
+var mainApp = angular.module('mainApp', ['ui.router', 'ui.bootstrap', 'mainApp.itemController', 'mainApp.loginService']);
 
 mainApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
         $urlRouterProvider.otherwise("/"); // set default url
@@ -17,7 +17,7 @@ mainApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
         var login = {
             url:'/login',
             templateUrl: '/app/login/login.html',
-            controller: 'LoginCtrl'
+            controller: 'MainCtrl'
         };
         
         $stateProvider.state('item', item)
@@ -25,6 +25,20 @@ mainApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvider,
                 .state('login', login);
 }]);
 
-mainApp.controller('MainCtrl',['$scope', '$state', function($scope, $state){
+mainApp.controller('MainCtrl',['$scope', '$state', 'LoginService', function($scope, $state, Login){
+    
+    $scope.login = function(){
+        var headers = $scope.credentials ? {authorization : "Basic " + btoa($scope.credentials.username + ":" + $scope.credentials.password)} : {};
         
+        Login.getUser(headers).get().$promise.then(function(data){
+            if(data.name){
+                $state.go("dashboard");
+                $scope.error = false;
+                $scope.authenticated = true;
+            }else{
+                $scope.error = true;
+                $scope.authenticated = false;
+            }
+        });
+    };
 }]);
