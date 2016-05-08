@@ -13,6 +13,8 @@ Untuk konfigurasi database, anda bisa membuka file `application.properties` yang
 
 ## Cara Menjalankan
 Buka Command Prompt arahkan ke root project kemudian jalankan perintah `mvn clean install`. Maven akan mendownload apa saja dependensi yang dibutuhkan untuk Spring. Kemudian jalankan perintah `bower install`, untuk mendownload dependensi angular js yang saya pakai pada project ini. Jika sudah selesai, jalankan project dengan perintah `mvn spring-boot:run`. Maka project sudah dapat diakses pada halaman `localhost:8080`.
+###Update
+Saat ini aplikasi saya update menggunakan spring security. Saya menggunakan Http Basic untuk melakukan autentifikasi user. Ketika aplikasi sudah dijalankan akan muncuk popup untuk input username dan password. Abaikan saja, dan klik menu login untuk memunculkan halaman login. Karena menggunakan Http Basic, maka username diisi dengan `user` dan password akan di generate oleh spring security dan dapat dilihat pada saat anda menjalankan aplikasi.
 
 ## Teknologi
 - Spring Boot
