@@ -14,7 +14,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.security.web.csrf.CsrfToken;
@@ -28,6 +30,7 @@ import org.springframework.web.util.WebUtils;
  * @author Artha
  */
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
     @Override
@@ -40,14 +43,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
                 .antMatchers("/bower_components/**").permitAll()
                 .antMatchers("/app/**/*.js").permitAll()
                 .antMatchers("/app/**/login.html").permitAll()
-//                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-        .and()
-            .addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
-            .csrf().csrfTokenRepository(csrfTokenRepository());
+                .anyRequest().authenticated().and().csrf().disable();
+//        .and()
+//            .addFilterAfter(csrfHeaderFilter(), CsrfFilter.class)
+//            .csrf().csrfTokenRepository(csrfTokenRepository());
                 
     }
-    
+ 
     /**
      * Method untuk menyimpan CSRF TOKEN di cookie browser.
      * Token disimpan dengan nama XSRF-TOKEN karena AngularJS mengenal CSRF sebagai XSRF
